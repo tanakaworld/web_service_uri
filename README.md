@@ -1,5 +1,7 @@
 # 🌈 web_service_uri
 
+[![CircleCI](https://circleci.com/gh/tanakaworld/web_service_uri/tree/master.svg?style=svg)](https://circleci.com/gh/tanakaworld/web_service_uri/tree/master)
+
 URI parser for web services in the world.
 
 ## Installation
