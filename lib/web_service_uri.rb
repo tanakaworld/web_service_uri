@@ -7,7 +7,7 @@ module WebServiceUri
     attr_reader :original_uri
 
     def self.available_services
-      [:github, :twitter, :facebook, :linked_in, :instagram]
+      [:github, :twitter, :facebook, :linkedin, :instagram]
     end
 
     def initialize(original_uri)
@@ -37,7 +37,7 @@ module WebServiceUri
       @sns_uri.host.include? 'facebook.com'
     end
 
-    def linked_in?
+    def linkedin?
       @sns_uri.host.include? 'linkedin.com'
     end
 

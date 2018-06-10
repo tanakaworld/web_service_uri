@@ -6,7 +6,7 @@ RSpec.describe WebServiceUri do
         github: "https://github.com/tanakaworld",
         twitter: "https://twitter.com/_tanakaworld",
         facebook: "https://www.facebook.com/tanaka.world",
-        linked_in: "https://www.linkedin.com/in/yutaro-tanaka-world-7863b249",
+        linkedin: "https://www.linkedin.com/in/yutaro-tanaka-world-7863b249",
         instagram: "https://www.instagram.com/_tanakaworld/"
     }
     @available_services = @service_uris.keys
