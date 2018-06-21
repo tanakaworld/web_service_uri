@@ -22,21 +22,33 @@ Or install it yourself as:
 
 ## Usage
 
-```
+```ruby
+# expected URI
 ws_uri = WebServiceUri::WebServiceUri.new "https://github.com/tanakaworld"
 ws_uri.github?
 # => true
 ws_uri.twitter?
 # => false 
+ws_uri.valid?
+# => true
+ws_uri.account_id
+# => "tanakaworld"
+
+# unexpected URI
+invalid_ws_uri = WebServiceUri::WebServiceUri.new "https://example.com/example"
+ws_uri.valid?
+# => false
+ws_uri.account_id
+# => nil
 ```
 
 ## Support services
 
-- GitHub
-- Twitter
-- Facebook
-- LinkedIn
-- Instagram
+- [GitHub](https://github.com/)
+- [Twitter](https://twitter.com/)
+- [Facebook](https://www.facebook.com/)
+- [LinkedIn](https://www.linkedin.com/)
+- [Instagram](https://www.instagram.com/)
 
 ```
 WebServiceUri::WebServiceUri.available_services
