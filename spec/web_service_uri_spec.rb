@@ -10,6 +10,7 @@ RSpec.describe WebServiceUri do
         instagram: "https://www.instagram.com/_tanakaworld/"
     }
     @available_services = @service_uris.keys
+    @not_service_uri = "https://example.com/example"
   end
 
   it "has a version number" do
@@ -50,10 +51,34 @@ RSpec.describe WebServiceUri do
     context "when is not service uri" do
       it "response false" do
         @available_services.each do |service_name|
-          ws_uri = WebServiceUri::WebServiceUri.new "https://example.com/example"
+          ws_uri = WebServiceUri::WebServiceUri.new @not_service_uri
           service_method_name = "#{service_name}?"
           expect(ws_uri.send(service_method_name)).to eql(false)
         end
+      end
+    end
+  end
+
+  describe "#valid?" do
+    context "when is expected service uri" do
+      let(:ws_uri) {WebServiceUri::WebServiceUri.new "https://github.com/tanakaworld"}
+
+      it "responds true" do
+        expect(ws_uri.valid?).to eql(true)
+      end
+      it "service_name is set" do
+        expect(ws_uri.service_name).to eql(:github)
+      end
+    end
+
+    context "when is unexpected uri" do
+      let(:ws_uri) {WebServiceUri::WebServiceUri.new @not_service_uri}
+
+      it "responds false" do
+        expect(ws_uri.valid?).to eql(false)
+      end
+      it "service_name is not set" do
+        expect(ws_uri.service_name).to be_nil
       end
     end
   end
