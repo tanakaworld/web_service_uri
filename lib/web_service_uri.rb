@@ -14,6 +14,7 @@ module WebServiceUri
         linkedin: 'linkedin.com',
         instagram: 'instagram.com'
     }
+
     @@services.each do |name, url|
       define_method "#{name}?" do
         @sns_uri.host.include? url
@@ -47,6 +48,20 @@ module WebServiceUri
         is_match = self.send "#{name}?"
         @service_name = name if is_match
         is_match
+      end
+    end
+
+    def account_id
+      return nil if @service_name.nil?
+
+      split = @sns_uri.path
+                  .chomp("/") # remove "/" at the end
+                  .split("/")
+
+      if @service_name == :linkedin
+        split[2]
+      else
+        split[1]
       end
     end
   end
