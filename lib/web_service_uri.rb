@@ -5,14 +5,32 @@ require "pathname"
 module WebServiceUri
   class WebServiceUri
     attr_reader :original_uri
+    attr_reader :service_name
+
+    @@services = {
+        github: 'github.com',
+        twitter: 'twitter.com',
+        facebook: 'facebook.com',
+        linkedin: 'linkedin.com',
+        instagram: 'instagram.com'
+    }
+
+    @@services.each do |name, url|
+      define_method "#{name}?" do
+        @sns_uri.host.include? url
+      end
+    end
 
     def self.available_services
-      [:github, :twitter, :facebook, :linkedin, :instagram]
+      @@services.keys
     end
 
     def initialize(original_uri)
       @original_uri = original_uri
       @sns_uri = URI.parse(original_uri)
+      @service_name = nil
+
+      valid?
     end
 
     def path
@@ -25,24 +43,26 @@ module WebServiceUri
       end
     end
 
-    def github?
-      @sns_uri.host.include? 'github.com'
+    def valid?
+      @@services.keys.any? do |name|
+        is_match = self.send "#{name}?"
+        @service_name = name if is_match
+        is_match
+      end
     end
 
-    def twitter?
-      @sns_uri.host.include? 'twitter.com'
-    end
+    def account_id
+      return nil if @service_name.nil?
 
-    def facebook?
-      @sns_uri.host.include? 'facebook.com'
-    end
+      split = @sns_uri.path
+                  .chomp("/") # remove "/" at the end
+                  .split("/")
 
-    def linkedin?
-      @sns_uri.host.include? 'linkedin.com'
-    end
-
-    def instagram?
-      @sns_uri.host.include? 'instagram.com'
+      if @service_name == :linkedin
+        split[2]
+      else
+        split[1]
+      end
     end
   end
 end
