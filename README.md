@@ -36,9 +36,9 @@ ws_uri.account_id
 
 # unexpected URI
 invalid_ws_uri = WebServiceUri::WebServiceUri.new "https://example.com/example"
-ws_uri.valid?
+invalid_ws_uri.valid?
 # => false
-ws_uri.account_id
+invalid_ws_uri.account_id
 # => nil
 ```
 
