@@ -6,8 +6,21 @@ module WebServiceUri
   class WebServiceUri
     attr_reader :original_uri
 
+    @@services = {
+        github: 'github.com',
+        twitter: 'twitter.com',
+        facebook: 'facebook.com',
+        linkedin: 'linkedin.com',
+        instagram: 'instagram.com'
+    }
+    @@services.each do |name, url|
+      define_method "#{name}?" do
+        @sns_uri.host.include? url
+      end
+    end
+
     def self.available_services
-      [:github, :twitter, :facebook, :linkedin, :instagram]
+      @@services.keys
     end
 
     def initialize(original_uri)
@@ -23,26 +36,6 @@ module WebServiceUri
       else
         @sns_uri.path
       end
-    end
-
-    def github?
-      @sns_uri.host.include? 'github.com'
-    end
-
-    def twitter?
-      @sns_uri.host.include? 'twitter.com'
-    end
-
-    def facebook?
-      @sns_uri.host.include? 'facebook.com'
-    end
-
-    def linkedin?
-      @sns_uri.host.include? 'linkedin.com'
-    end
-
-    def instagram?
-      @sns_uri.host.include? 'instagram.com'
     end
   end
 end
