@@ -1,6 +1,7 @@
 # 🌈 web_service_uri
 
 [![CircleCI](https://circleci.com/gh/tanakaworld/web_service_uri/tree/master.svg?style=svg)](https://circleci.com/gh/tanakaworld/web_service_uri/tree/master)
+[![Gem Version](https://badge.fury.io/rb/web_service_uri.svg)](https://badge.fury.io/rb/web_service_uri)
 
 URI parser for web services in the world.
 
